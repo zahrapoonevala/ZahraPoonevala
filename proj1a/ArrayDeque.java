@@ -15,16 +15,6 @@ public class ArrayDeque <T> {
         backIndex = 1;
 
     }
-
-    private void reSize (int capacity ){
-        T[] a = (T[]) new Object[capacity];
-        int tempStarting = backHelper(frontIndex);
-        System.arraycopy(items, tempStarting , a, 0 , size);
-        items = a;
-        frontIndex = capacity - 1;
-        backIndex = size;
-    }
-
     private int firstHelper (int i){
         if(i == 0){
             return items.length - 1;
@@ -39,6 +29,18 @@ public class ArrayDeque <T> {
         } else {
             return i + 1;
         }
+    }
+
+    private void reSize (int capacity ){
+        T[] a = (T[]) new Object[capacity];
+        int tempStarting = backHelper(frontIndex);
+        for (int i = 0; i < size; i ++){
+            a[i] = items[tempStarting];
+            tempStarting = backHelper(tempStarting);
+        }
+        items = a;
+        frontIndex = capacity - 1;
+        backIndex = size;
     }
 
     public void addFirst(T item){
@@ -72,7 +74,7 @@ public class ArrayDeque <T> {
     }
 
     public void printDeque(){
-        for (int i = firstHelper(frontIndex); i != backIndex; i=firstHelper(i)){
+        for (int i = backHelper(frontIndex); i != backIndex; i=backHelper(i)){
             System.out.print(items[i] + " ");
         }
         System.out.println();
@@ -125,14 +127,6 @@ public class ArrayDeque <T> {
         return items[adjustedIndex];
 
     }
-
-
-
-
-
-
-
-
 
 
 }
