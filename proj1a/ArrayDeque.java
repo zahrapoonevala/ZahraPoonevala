@@ -97,7 +97,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25) {
-            reSize((int) (items.length / (REFACTOR*2)));
+            reSize((int) (items.length / REFACTOR));
         }
 
         return first;
@@ -115,7 +115,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25){
-            reSize((int) (items.length / (REFACTOR*2)));
+            reSize((int) (items.length / REFACTOR));
         }
         return back;
     }
