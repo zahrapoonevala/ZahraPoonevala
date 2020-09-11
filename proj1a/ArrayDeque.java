@@ -1,5 +1,3 @@
-import org.w3c.dom.Node;
-
 public class ArrayDeque <T> {
     private int size;
     private T [] items;
@@ -35,7 +33,7 @@ public class ArrayDeque <T> {
         if (size == 0){
             return;
         }
-        T[] a = (T[]) new Object[capacity * 2];
+        T[] a = (T[]) new Object[capacity * REFACTOR];
 
         int firstIndex = backHelper(frontIndex);
         int lastIndex = firstHelper(backIndex);
@@ -100,7 +98,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25){
-            reSize((int) (items.length / REFACTOR));
+            reSize((int) (items.length * 0.25));
         }
 
         return first;
@@ -118,7 +116,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25){
-            reSize((int) (items.length / REFACTOR));
+            reSize((int) (items.length * 0.25));
         }
 
         return back;

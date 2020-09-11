@@ -97,7 +97,7 @@ public class LinkedListDeque <T> {
             return getRecursiveHelp(index, sentinel.next);
          }
 
-        public T getRecursiveHelp(int index, Node tempNode){
+        private T getRecursiveHelp(int index, Node tempNode){
             if(index == 0){
                 return tempNode.item;
             }else{
