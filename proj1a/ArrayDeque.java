@@ -33,7 +33,7 @@ public class ArrayDeque <T> {
         if (size == 0){
             return;
         }
-        T[] a = (T[]) new Object[capacity * REFACTOR];
+        T[] a = (T[]) new Object[capacity * 2];
 
         int firstIndex = backHelper(frontIndex);
         int lastIndex = firstHelper(backIndex);
@@ -98,7 +98,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25){
-            reSize((int) (items.length * 0.25));
+            reSize((int) (items.length / REFACTOR));
         }
 
         return first;
@@ -116,7 +116,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25){
-            reSize((int) (items.length * 0.25));
+            reSize((int) (items.length / REFACTOR));
         }
 
         return back;
