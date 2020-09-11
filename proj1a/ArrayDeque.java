@@ -4,7 +4,7 @@ public class ArrayDeque <T> {
     private int REFACTOR = 2;
     private int frontIndex;
     private int backIndex;
-    private double usageRatio = 0;
+    private double usageRatio = 0.0;
 
     public ArrayDeque () {
         size = 0;
@@ -30,10 +30,8 @@ public class ArrayDeque <T> {
     }
 
     private void reSize(int capacity) {
-        if (size == 0){
-            return;
-        }
-        T[] a = (T[]) new Object[capacity];
+
+        T[] a = (T[]) new Object[capacity * 2];
 
         int tempFirst = backHelper(frontIndex);
         int tempLast = firstHelper(backIndex);
@@ -47,6 +45,7 @@ public class ArrayDeque <T> {
         items = a;
         frontIndex = items.length - 1;
         backIndex = size;
+
     }
 
     public void addFirst(T item){
@@ -98,7 +97,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25) {
-            reSize((int) (items.length / REFACTOR));
+            reSize((int) (items.length / (REFACTOR*2)));
         }
 
         return first;
@@ -116,7 +115,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25){
-            reSize((int) (items.length / REFACTOR));
+            reSize((int) (items.length / (REFACTOR*2)));
         }
         return back;
     }
