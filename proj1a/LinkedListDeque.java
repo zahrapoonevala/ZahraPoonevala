@@ -93,29 +93,29 @@ public class LinkedListDeque <T> {
             return tempNode.item;
         }
 
-//        public T getRecursive(int index){
-//            return getRecursiveHelp(index, sentinel.next);
-//         }
-//
-//        public T getRecursiveHelp(int index, Node tempNode){
-//            if(index == 0){
-//                return tempNode.item;
-//            }else{
-//                tempNode = tempNode.next;
-//                return getRecursiveHelp(index - 1,tempNode);
-//            }
-//
-//        }
+        public T getRecursive(int index){
+            return getRecursiveHelp(index, sentinel.next);
+         }
 
-        public T getRecursive(int index) {
-            if (index == 0) {
-                return sentinel.next.item;
-            } else {
-                sentinel.next = sentinel.next.next;
-                return getRecursive(index - 1);
+        public T getRecursiveHelp(int index, Node tempNode){
+            if(index == 0){
+                return tempNode.item;
+            }else{
+                tempNode = tempNode.next;
+                return getRecursiveHelp(index - 1,tempNode);
+            }
+
         }
 
-    }
+//        public T getRecursive(int index) {
+//            if (index == 0) {
+//                return sentinel.next.item;
+//            } else {
+//                sentinel.next = sentinel.next.next;
+//                return getRecursive(index - 1);
+//        }
+//
+//    }
 
 
 

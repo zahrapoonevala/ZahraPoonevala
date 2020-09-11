@@ -31,15 +31,23 @@ public class ArrayDeque <T> {
         }
     }
 
-    private void reSize (int capacity ){
-        T[] a = (T[]) new Object[capacity];
-        int tempStarting = backHelper(frontIndex);
-        for (int i = 0; i < size; i ++){
-            a[i] = items[tempStarting];
-            tempStarting = backHelper(tempStarting);
+    private void reSize(int capacity) {
+        if (size == 0){
+            return;
+        }
+        T[] a = (T[]) new Object[capacity * 2];
+
+        int firstIndex = backHelper(frontIndex);
+        int lastIndex = firstHelper(backIndex);
+
+        if (firstIndex > lastIndex) {
+            System.arraycopy(items, firstIndex, a, 0, items.length - firstIndex );
+            System.arraycopy(items, 0, a, items.length - firstIndex, lastIndex + 1);
+        } else {
+            System.arraycopy(items, firstIndex, a, 0, size);
         }
         items = a;
-        frontIndex = capacity - 1;
+        frontIndex = items.length - 1;
         backIndex = size;
     }
 
