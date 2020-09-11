@@ -4,7 +4,7 @@ public class ArrayDeque <T> {
     private int REFACTOR = 2;
     private int frontIndex;
     private int backIndex;
-    private double usageRatio = 0;
+    private double usageRatio = 0.0;
 
     public ArrayDeque () {
         size = 0;
@@ -33,19 +33,20 @@ public class ArrayDeque <T> {
         if (size == 0){
             return;
         }
-        T[] a = (T[]) new Object[capacity * 2];
+        T[] a = (T[]) new Object[capacity * REFACTOR];
 
-        int firstIndex = backHelper(frontIndex);
-        int lastIndex = firstHelper(backIndex);
+        int length = items.length;
+        int tempFirst = backHelper(frontIndex);
+        int tempLast = firstHelper(backIndex);
 
-        if (firstIndex > lastIndex) {
-            System.arraycopy(items, firstIndex, a, 0, items.length - firstIndex );
-            System.arraycopy(items, 0, a, items.length - firstIndex, lastIndex + 1);
+        if (tempFirst > tempLast) {
+            System.arraycopy(items, tempFirst, a, 0, length - tempFirst );
+            System.arraycopy(items, 0, a, length - tempFirst, tempLast + 1);
         } else {
-            System.arraycopy(items, firstIndex, a, 0, size);
+            System.arraycopy(items, tempFirst, a, 0, size);
         }
         items = a;
-        frontIndex = items.length - 1;
+        frontIndex = length - 1;
         backIndex = size;
     }
 
@@ -96,8 +97,8 @@ public class ArrayDeque <T> {
         frontIndex = tempFirst;
         size -= 1;
 
-        usageRatio = size/items.length;
-        if (usageRatio < 0.25){
+        usageRatio = (float) size/items.length;
+        if (items.length >= 16 && usageRatio < 0.25) {
             reSize((int) (items.length / REFACTOR));
         }
 
@@ -114,11 +115,10 @@ public class ArrayDeque <T> {
         backIndex = tempLast;
         size -= 1;
 
-        usageRatio = size/items.length;
-        if (usageRatio < 0.25){
+        usageRatio = (float)size/items.length;
+        if (items.length >= 16 && usageRatio < 0.25){
             reSize((int) (items.length / REFACTOR));
         }
-
         return back;
     }
 
