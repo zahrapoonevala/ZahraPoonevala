@@ -38,8 +38,8 @@ public class ArrayDeque <T> {
 
         /*Because its a circular array i'm copying in two parts */
         if (tempFirst > tempLast) {
-            System.arraycopy(items, tempFirst, a, 0, items.length - tempFirst );
-            System.arraycopy(items, 0, a, items.length - tempFirst, tempLast + 1);
+            System.arraycopy(items, tempFirst, a, 0, Math.abs(size - tempFirst ));
+            System.arraycopy(items, 0, a, Math.abs(size - tempFirst) , tempLast + 1);
         } else {
             System.arraycopy(items, tempFirst, a, 0, size);
         }
