@@ -30,6 +30,9 @@ public class ArrayDeque <T> {
     }
 
     private void reSize(int capacity) {
+        if(size == 0){
+            return;
+        }
 
         T[] a = (T[]) new Object[capacity * 2];
 
@@ -38,8 +41,8 @@ public class ArrayDeque <T> {
 
         /*Because its a circular array i'm copying in two parts */
         if (tempFirst > tempLast) {
-            System.arraycopy(items, tempFirst, a, 0, a.length - tempFirst );
-            System.arraycopy(items, 0, a, a.length - tempFirst, tempLast + 1);
+            System.arraycopy(items, tempFirst, a, 0, size-1 - tempFirst );
+            System.arraycopy(items, 0, a, size-1 - tempFirst, tempLast + 1);
         } else {
             System.arraycopy(items, tempFirst, a, 0, size);
         }
