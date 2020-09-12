@@ -30,26 +30,18 @@ public class ArrayDeque <T> {
     }
 
     private void reSize(int capacity) {
-        if(size == 0){
-            return;
+
+        T[] a = (T[]) new Object[capacity];
+
+        int curr = backHelper(frontIndex);
+        for (int i = 0; i < size; i++) {
+            a[i] = items[curr];
+            curr = backHelper(curr);
         }
 
-        T[] a = (T[]) new Object[capacity * 2];
-
-        int tempFirst = backHelper(frontIndex);
-        int tempLast = firstHelper(backIndex);
-
-        /*Because its a circular array i'm copying in two parts */
-        if (tempFirst > tempLast) {
-            System.arraycopy(items, tempFirst, a, 0, size-1 - tempFirst );
-            System.arraycopy(items, 0, a, size-1 - tempFirst, tempLast + 1);
-        } else {
-            System.arraycopy(items, tempFirst, a, 0, size);
-        }
         items = a;
-        frontIndex = items.length - 1;
-        backIndex = size;
-
+        frontIndex = capacity - 1;
+        backIndex= size;
     }
 
     public void addFirst(T item){
@@ -101,7 +93,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25) {
-            reSize((int) (items.length / 4));
+            reSize((int) (items.length / 2));
         }
 
         return first;
@@ -119,7 +111,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25){
-            reSize((int) (items.length / 4));
+            reSize((int) (items.length / 2));
         }
         return back;
     }
