@@ -91,9 +91,9 @@ public class ArrayDeque <T> {
         frontIndex = tempFirst;
         size -= 1;
 
-        usageRatio = size/items.length;
-        if (usageRatio < 0.25 && items.length > 2 ) {
-            reSize((int) (items.length / 2));
+        usageRatio = (float)size/items.length;
+        if (usageRatio < 0.25 && items.length > 16 ) {
+            reSize(items.length / 2);
         }
 
         return first;
@@ -109,9 +109,9 @@ public class ArrayDeque <T> {
         backIndex = tempLast;
         size -= 1;
 
-        usageRatio = size/items.length;
-        if (usageRatio < 0.25 && items.length > 2 ){
-            reSize((int) (items.length / 2));
+        usageRatio = (float)size/items.length;
+        if (usageRatio < 0.25 && items.length > 16 ){
+            reSize(items.length / 2);
         }
         return back;
     }
