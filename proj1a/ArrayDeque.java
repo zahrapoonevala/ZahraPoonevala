@@ -36,6 +36,7 @@ public class ArrayDeque <T> {
         int tempFirst = backHelper(frontIndex);
         int tempLast = firstHelper(backIndex);
 
+        /*Because its a circular array i'm copying in two parts */
         if (tempFirst > tempLast) {
             System.arraycopy(items, tempFirst, a, 0, items.length - tempFirst );
             System.arraycopy(items, 0, a, items.length - tempFirst, tempLast + 1);
@@ -97,7 +98,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25) {
-            reSize((int) (items.length / REFACTOR));
+            reSize((int) (items.length / 4));
         }
 
         return first;
@@ -115,7 +116,7 @@ public class ArrayDeque <T> {
 
         usageRatio = size/items.length;
         if (usageRatio < 0.25){
-            reSize((int) (items.length / REFACTOR));
+            reSize((int) (items.length / 4));
         }
         return back;
     }
