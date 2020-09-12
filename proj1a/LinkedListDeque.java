@@ -28,7 +28,7 @@ public class LinkedListDeque<T> {
     * @param item to be added.
     * */
     public void addFirst(T item) {
-        Node first = new Node(item,sentinel.next,sentinel);
+        Node first = new Node(item, sentinel.next, sentinel);
         sentinel.next.previous = first;
         sentinel.next = sentinel.next.previous;
         size += 1;
@@ -47,7 +47,7 @@ public class LinkedListDeque<T> {
 
     /* Checks if the Linked List is empty. */
     public boolean isEmpty() {
-        if (size == 0){
+        if (size == 0) {
             return true;
         }
         return false;
@@ -99,7 +99,7 @@ public class LinkedListDeque<T> {
     public T get(int index) {
         Node tempNode = sentinel.next;
         int counter = 0;
-        if(index >= size) {
+        if (index >= size) {
             return null;
         }
         while (counter < index) {
@@ -119,8 +119,8 @@ public class LinkedListDeque<T> {
     /* Recursive helper to adjust both the index and Linked List for the next call.
      * * @param index of desired item, Linked List.
      * */
-    private T getRecursiveHelp(int index, Node tempNode){
-        if(index == 0) {
+    private T getRecursiveHelp(int index, Node tempNode) {
+        if (index == 0) {
             return tempNode.item;
         } else {
             tempNode = tempNode.next;
