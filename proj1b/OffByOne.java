@@ -4,7 +4,7 @@ public class OffByOne implements CharacterComparator {
     public boolean equalChars(char x, char y) {
         int number = Math.abs(x - y);
 
-        if (number == 1){
+        if (number == 1) {
             return true;
         }
 
