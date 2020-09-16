@@ -37,6 +37,7 @@ public class TestPalindrome {
     public void testCornerCases() {
         assertTrue(palindrome.isPalindrome("A"));
         assertTrue(palindrome.isPalindrome(""));
+        assertFalse(palindrome.isPalindrome(null));
 
     }
 

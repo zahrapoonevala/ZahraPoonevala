@@ -12,19 +12,18 @@ public class Palindrome {
     }
 
     public boolean isPalindrome(String word) {
-        Deque<Character> fixedWord = wordToDeque(word);
-        int counter = 0;
-
         if (word == null) {
             return false;
         }
+        Deque<Character> fixedWord1 = wordToDeque(word);
+        int counter = 0;
 
-        if (fixedWord.size() == 0 || fixedWord.size() == 1) {
+        if (fixedWord1.size() == 0 || fixedWord1.size() == 1) {
             return true;
         }
 
-        while (counter < fixedWord.size()) {
-            if (fixedWord.removeFirst() != fixedWord.removeLast()) {
+        while (counter < fixedWord1.size()) {
+            if (fixedWord1.removeFirst() != fixedWord1.removeLast()) {
                 return false;
             }
 
@@ -34,12 +33,11 @@ public class Palindrome {
     }
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
-        Deque<Character> fixedWord = wordToDeque(word);
-        int counter = 0;
-
-        if (word == null){
+        if (word == null) {
             return false;
         }
+        Deque<Character> fixedWord = wordToDeque(word);
+        int counter = 0;
 
         if (fixedWord.size() == 0 || fixedWord.size() == 1) {
             return true;
@@ -53,6 +51,6 @@ public class Palindrome {
             counter++;
         }
 
-            return true;
-        }
+        return true;
     }
+}
