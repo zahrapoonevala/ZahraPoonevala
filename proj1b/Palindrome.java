@@ -16,9 +16,8 @@ public class Palindrome {
         int counter = 0;
         if(fixedWord.size() == 0 || fixedWord.size() == 1){
             return true;
-        }else if (word == null){
-            return false;
         }
+
         while(counter < fixedWord.size() ){
             if (fixedWord.removeFirst() != fixedWord.removeLast()){
                 return false;

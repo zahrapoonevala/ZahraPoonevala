@@ -84,13 +84,13 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     /* Checks if it is empty. */
-    @Override
-    public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean isEmpty() {
+//        if (size == 0) {
+//            return true;
+//        }
+//        return false;
+//    }
 
     /* Returns the size. */
     @Override

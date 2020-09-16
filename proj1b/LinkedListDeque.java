@@ -47,14 +47,14 @@ public class LinkedListDeque<T> implements Deque<T>{
         size += 1;
     }
 
-    /* Checks if the Linked List is empty. */
-    @Override
-    public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        }
-        return false;
-    }
+//    /* Checks if the Linked List is empty. */
+//    @Override
+//    public boolean isEmpty() {
+//        if (size == 0) {
+//            return true;
+//        }
+//        return false;
+//    }
 
     /* Returns the size */
     @Override
