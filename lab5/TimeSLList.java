@@ -32,12 +32,12 @@ public class TimeSLList {
                 temp.addFirst(j);
             }
             Stopwatch sw = new Stopwatch();
-            for(int m = 0; m < i; m++){
+            for(int m = 0; m < 5000; m++){
                 temp.getLast();
             }
             times.add(sw.elapsedTime());
             Ns.add(i);
-            opCounts.add(i);
+            opCounts.add(5000);
 
         }
 
