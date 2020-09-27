@@ -1,9 +1,6 @@
 package es.datastructur.synthesizer;
 import java.util.Iterator;
 
-//TODO: Make sure to that this class and all of its methods are public
-//TODO: Make sure to add the override tag for all overridden methods
-//TODO: Make sure to make this class implement BoundedQueue<T>
 
 public class ArrayRingBuffer<T> implements BoundedQueue<T> {
     /* Index for the next dequeue or peek. */
@@ -52,8 +49,7 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
         first = 0;
         last = 0;
         fillCount = 0;
-        // TODO: Create new array with capacity elements.
-        //       first, last, and fillCount should all be set to 0.
+
     }
 
     @Override
@@ -72,9 +68,6 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
      */
     @Override
     public void enqueue(T x) {
-        // TODO: Enqueue the item. Don't forget to increase fillCount and update
-        //       last. Don't worry about throwing the RuntimeException until you
-        //       get to task 4.
         if (fillCount >= capacity()){
             throw new RuntimeException("Ring Buffer overflow");
         }
@@ -93,9 +86,6 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
      */
     @Override
     public T dequeue() {
-        // TODO: Dequeue the first item. Don't forget to decrease fillCount and
-        //       update first. Don't worry about throwing the RuntimeException until you
-        //       get to task 4.
         if (fillCount == 0){
             throw new RuntimeException("Ring Buffer underflow");
         }
@@ -115,9 +105,6 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
      */
     @Override
     public T peek() {
-        // TODO: Return the first item. None of your instance variables should
-        //       change. Don't worry about throwing the RuntimeException until you
-        //       get to task 4.
         if (fillCount == 0){
             throw new RuntimeException("Ring Buffer underflow");
         }
@@ -148,8 +135,5 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
         return true;
     }
 
-
-    // TODO: When you get to part 4, implement the needed code to support
-    //       iteration and equals.
 }
-    // TODO: Remove all comments that say TODO when you're done.
+
