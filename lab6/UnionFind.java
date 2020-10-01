@@ -57,12 +57,11 @@ public class UnionFind {
         int i = find(v1);
         int j = find(v2);
         if(sizeOf(v1) > sizeOf(v2)) {
-            parent[i] -= sizeOf(v2);
             parent[j] = i;
+        } else {
+            parent[i] = j;
         }
 
-        parent[j] -=sizeOf(v1);
-        parent[i] = j;
     }
 
     /* Returns the root of the set v1 belongs to. Path-compression is employed
