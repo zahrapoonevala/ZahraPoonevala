@@ -50,18 +50,17 @@ public class UnionFind {
        change the sets but may alter the internal structure of the data. */
     public void connect(int v1, int v2) {
        validate(v1);
-       validate(v2);
        if(isConnected(v1,v2)) {
            return;
         }
-        int i = find(v1);
-        int j = find(v2);
+        v1 = find(v1);
+        v2  = find(v2);
         if(sizeOf(v1) > sizeOf(v2)) {
-            parent[i] -= sizeOf(v2);
-            parent[j] = i;
+            parent[v1] -= sizeOf(v2);
+            parent[v2] = v1;
         } else {
-            parent[j] -=sizeOf(v1);
-            parent[i] = j;
+            parent[v2] -=sizeOf(v1);
+            parent[v1] = v2;
         }
 
 
