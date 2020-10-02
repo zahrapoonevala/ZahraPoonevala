@@ -50,7 +50,9 @@ public class UnionFind {
        change the sets but may alter the internal structure of the data. */
     public void connect(int v1, int v2) {
        validate(v1);
-       
+       if(isConnected(v1,v2)) {
+           return;
+        }
         v1 = find(v1);
         v2  = find(v2);
         if(sizeOf(v1) > sizeOf(v2)) {
