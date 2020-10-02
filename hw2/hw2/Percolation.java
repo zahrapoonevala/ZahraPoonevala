@@ -21,7 +21,7 @@ public class Percolation {
         this.virtualTop = N * N;
         this.virtualBottom = N * N + 1;
 
-        this.full = new WeightedQuickUnionUF(N * N + 1); //includes virtual top only to check if full
+        this.full = new WeightedQuickUnionUF(N * N + 1); //includes virtual top to check if full
         this.percolation = new WeightedQuickUnionUF(N * N + 2); //includes both virtuals
 
         this.openSites = 0;
@@ -102,21 +102,21 @@ public class Percolation {
         return false;
     }
 
-    public int numberOfOpenSites(){
+    public int numberOfOpenSites() {
         return openSites;
     }
 
-    public boolean percolates(){
-        if (percolation.connected(virtualTop, virtualBottom)){
+    public boolean percolates() {
+        if (percolation.connected(virtualTop, virtualBottom)) {
             return true;
         }
         return false;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Percolation p = new Percolation(5);
-        p.open(0,0);
-        p.isOpen(0,0);
+        p.open(0, 0);
+        p.isOpen(0, 0);
 
     }
 
