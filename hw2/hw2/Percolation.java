@@ -33,6 +33,7 @@ public class Percolation {
         return( (r*size) + c );
     }
 
+
     public void open(int row, int col){
         if (row < 0 || row >= size || col < 0 || col >= size){
             throw new IllegalArgumentException();
@@ -81,11 +82,12 @@ public class Percolation {
     }
 
     public boolean isOpen(int row, int col){
-        if (row < 0 || row >= size || col < 0 || col >= size){
-            throw new IllegalArgumentException();
+        if(row < 0 || row >= size || col < 0 || col >= size){
+            return false;
         }
 
         return gridPercolation[row][col];
+
     }
 
     public boolean isFull(int row, int col){
@@ -114,6 +116,7 @@ public class Percolation {
     public static void main(String[] args){
         Percolation p = new Percolation(5);
         p.open(0,0);
+        p.isOpen(0,0);
 
     }
 
