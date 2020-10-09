@@ -50,7 +50,8 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K,V> {
 
     @Override
     public boolean containsKey(K key) {
-        return false;
+
+        return get(key) != null;
     }
 
 
@@ -62,34 +63,22 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K,V> {
 
     @Override
     public void put(K key, V value) {
-        if(root == null){
-            root = new BSTNode(key, value);
-            size = 1;
-        } else {
-            putHelp(key, root, value);
-        }
+            root = putHelp(key, root, value);
+            size += 1;
     }
 
     private BSTNode putHelp(K key, BSTNode tree, V value) {
         if (tree == null) {
-            return null;
+            //size ++;
+            return new BSTNode(key,value);
         }
         int temp = tree.key.compareTo(key);
         if (temp > 0) {
-            if (tree.right != null) {
-                return putHelp(key, tree.right, value);
-            } else {
-                tree.right = new BSTNode(key, value);
-                size++;
-            }
-
+            tree.right = putHelp(key, tree.right, value);
+            //size ++;
         } else if (temp < 0) {
-            if (tree.left != null) {
-                return putHelp(key, tree.left, value);
-            } else {
-                tree.left = new BSTNode(key, value);
-                size++;
-            }
+            tree.left = putHelp(key, tree.left, value);
+            //size++;
         } else {
             tree.value = value;
         }
