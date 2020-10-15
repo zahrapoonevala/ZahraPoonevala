@@ -107,7 +107,7 @@ public class KDTreeTest {
         testWithNPointsAndQQueries(pointCount, queryCount);
     }
 
-    
+
 
     private static void printTimingTable(List<Integer> Ns, List<Double> times, List<Integer> opCounts) {
         System.out.printf("%12s %12s %12s %12s\n", "N", "time (s)", "# ops", "microsec/op");
@@ -122,19 +122,45 @@ public class KDTreeTest {
     }
 
     @Test
+    public void timeConstructKD() {
+        List<Integer> Ns1 = new ArrayList<>();
+        List<Double> times = new ArrayList<>();
+        List<Integer> opCounts = new ArrayList<>();
+        List<Point> randomPoints = randomPoints(100000);
+
+        Stopwatch sw1 = new Stopwatch();
+        for(int i = 31250; i<= 2000000; i = i + i){
+            KDTree testKD1 = new KDTree(randomPoints(i));
+            //List<Point> xPoints = randomPoints(i);
+
+
+            //for(int m = 0; m<10000; m++){
+                //new KDTree(randomPoints);
+            // System.out.println(pRand);
+            times.add(sw1.elapsedTime());
+            Ns1.add(i);
+            opCounts.add(1000000);
+            }
+        printTimingTable( Ns1, times,  opCounts);
+
+        }
+
+
+    @Test
     public void timeGetKD() {
         List<Integer> Ns1 = new ArrayList<>();
         List<Double> times = new ArrayList<>();
         List<Integer> opCounts = new ArrayList<>();
         List<Point> randomPoints = randomPoints(100000);
         long seed = 0;
-        for(int i = 31250; i<= 100000; i = i + i){
+        for(int i = 31250; i<= 1000000; i = i + i){
             KDTree testKD = new KDTree(randomPoints(i));
             //List<Point> xPoints = randomPoints(i);
             Random r = new Random(seed);
             seed+=1;
+
             Stopwatch sw1 = new Stopwatch();
-            for(int m = 0; m<1000000; m++){
+            for(int m = 0; m<10000; m++){
                 Point pRand = randomPoint(r);
                 testKD.nearest(pRand.getX(), pRand.getY());
                 //System.out.println(pRand);
@@ -149,29 +175,31 @@ public class KDTreeTest {
 
     }
 
-//    @Test
-//    public void timeGetNaive() {
-//        List<Integer> Ns = new ArrayList<>();
-//        List<Double> times = new ArrayList<>();
-//        List<Integer> opCounts = new ArrayList<>();
-//        List<Point> randomPoints = randomPoints(100000);
-//        for(int i = 125; i<= 1000; i = i + i){
-//            NaivePointSet ns = new NaivePointSet(randomPoints(i));
-//            //List<Point> xPoints = randomPoints(i);
-//            Stopwatch sw = new Stopwatch();
-//            for(int m = 0; m<1000000; m++){
-//                Point pRand = randomPoint();
-//                ns.nearest(pRand.getX(), pRand.getY());
-//            }
-//            times.add(sw.elapsedTime());
-//            Ns.add(i);
-//            opCounts.add(1000000);
-//
-//        }
-//
-//        printTimingTable( Ns, times,  opCounts);
-//
-//    }
+    @Test
+    public void timeGetNaive() {
+        List<Integer> Ns = new ArrayList<>();
+        List<Double> times = new ArrayList<>();
+        List<Integer> opCounts = new ArrayList<>();
+        List<Point> randomPoints = randomPoints(100000);
+        Random r = new Random(500);
+        for(int i = 125; i<= 1000; i = i + i){
+            NaivePointSet ns = new NaivePointSet(randomPoints(i));
+            //List<Point> xPoints = randomPoints(i);
+
+            Stopwatch sw = new Stopwatch();
+            for(int m = 0; m<1000000; m++){
+                Point pRand = randomPoint(r);
+                ns.nearest(pRand.getX(), pRand.getY());
+            }
+            times.add(sw.elapsedTime());
+            Ns.add(i);
+            opCounts.add(1000000);
+
+        }
+
+        printTimingTable( Ns, times,  opCounts);
+
+    }
 
 
 
