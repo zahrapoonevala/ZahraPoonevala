@@ -17,7 +17,7 @@ public class KDTree {
         private Node(Point p, boolean subspaces){
             temp = p;
             this.subspaces = subspaces;
-            c = 0;
+            //c = 0;
         }
 
     }
@@ -55,16 +55,15 @@ public class KDTree {
 
     /** @source cs61b 2019 ds6 lec22 kd trees pseudocode */
     public Point nearest(double x, double y){
-        c = 0;
+        //c = 0;
         Node tempNode = nearestHelper(root,new Point(x,y),root);
-        System.out.println(c);
+        //System.out.println(c);
         return new Point(tempNode.temp.getX(), tempNode.temp.getY());
     }
 
     private static int c = 0;
     private Node nearestHelper(Node n, Point goal, Node best){
         if(n == null){
-            c = c+1;
             return best;
 
         }
