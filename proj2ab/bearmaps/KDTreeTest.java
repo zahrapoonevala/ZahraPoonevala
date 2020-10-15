@@ -39,21 +39,21 @@ public class KDTreeTest {
         assertEquals(expected,actual);
     }
 
-    private Point randomPoint(Random r){
+    private Point randomPoint(){
 //        double x = rTemp.nextDouble()*1000;
 //        double y = rTemp.nextDouble()*1000;
 //        return new Point(x,y);
-        //Random rTemp = new Random(500);
-        return new Point(randomX(r), randomY(r));
+        Random rTemp = new Random(500);
+        return new Point(randomX(rTemp), randomY(rTemp));
     }
 
     private List<Point> randomPoints(int N){
         List<Point> pointsTemp = new ArrayList<>();
-        long c = 500;
-        Random rTemp = new Random(c);
-        c ++;
+//        long c = 500;
+//        Random rTemp = new Random(c);
+//        c ++;
         for (int i = 0; i < N; i ++){
-            pointsTemp.add(randomPoint(rTemp));
+            pointsTemp.add(randomPoint());
         }
         return pointsTemp;
     }
@@ -152,16 +152,14 @@ public class KDTreeTest {
         List<Double> times = new ArrayList<>();
         List<Integer> opCounts = new ArrayList<>();
         List<Point> randomPoints = randomPoints(100000);
-        long seed = 0;
+        //Random r = new Random(500);
         for(int i = 31250; i<= 1000000; i = i + i){
             KDTree testKD = new KDTree(randomPoints(i));
             //List<Point> xPoints = randomPoints(i);
-            Random r = new Random(seed);
-            seed+=1;
 
             Stopwatch sw1 = new Stopwatch();
-            for(int m = 0; m<10000; m++){
-                Point pRand = randomPoint(r);
+            for(int m = 0; m<1000000; m++){
+                Point pRand = randomPoint();
                 testKD.nearest(pRand.getX(), pRand.getY());
                 //System.out.println(pRand);
             }
@@ -181,14 +179,14 @@ public class KDTreeTest {
         List<Double> times = new ArrayList<>();
         List<Integer> opCounts = new ArrayList<>();
         List<Point> randomPoints = randomPoints(100000);
-        Random r = new Random(500);
+        //Random r = new Random(500);
         for(int i = 125; i<= 1000; i = i + i){
             NaivePointSet ns = new NaivePointSet(randomPoints(i));
             //List<Point> xPoints = randomPoints(i);
 
             Stopwatch sw = new Stopwatch();
             for(int m = 0; m<1000000; m++){
-                Point pRand = randomPoint(r);
+                Point pRand = randomPoint();
                 ns.nearest(pRand.getX(), pRand.getY());
             }
             times.add(sw.elapsedTime());
