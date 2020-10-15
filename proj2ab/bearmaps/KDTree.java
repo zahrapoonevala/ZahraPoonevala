@@ -17,6 +17,7 @@ public class KDTree {
         private Node(Point p, boolean subspaces){
             temp = p;
             this.subspaces = subspaces;
+            c = 0;
         }
 
     }
@@ -54,13 +55,18 @@ public class KDTree {
 
     /** @source cs61b 2019 ds6 lec22 kd trees pseudocode */
     public Point nearest(double x, double y){
+        c = 0;
         Node tempNode = nearestHelper(root,new Point(x,y),root);
+        System.out.println(c);
         return new Point(tempNode.temp.getX(), tempNode.temp.getY());
     }
 
+    private static int c = 0;
     private Node nearestHelper(Node n, Point goal, Node best){
         if(n == null){
+            c = c+1;
             return best;
+
         }
 
         if(Point.distance(n.temp, goal) < Point.distance(best.temp,goal)){
@@ -77,23 +83,25 @@ public class KDTree {
             badSide = n.left;
 
         }
+        best = nearestHelper(goodSide,goal,best);
+
         if (useful(n, goal, best)){
             best = nearestHelper(badSide, goal, best);
         }
-
-        best = nearestHelper(goodSide,goal,best);
 
         return best;
     }
 
     private boolean useful(Node n, Point goal, Node best) {
         double bestPossible = Point.distance(goal, best.temp);
+        Point tempBest = new Point(goal.getX(), n.temp.getY());
+        Point tempBest1 = new Point(n.temp.getX(), goal.getY());
         if (n.subspaces) {
-            if (Math.pow(Math.abs(n.temp.getX() - goal.getX()), 2) < bestPossible) {
+            if (Point.distance(tempBest, goal) < bestPossible) {
                 return true;
             }
         } else {
-            if (Math.pow(Math.abs(n.temp.getY() - goal.getY()), 2) < bestPossible) {
+            if (Point.distance(tempBest1, goal) < bestPossible) {
                 return true;
             }
         }

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 
 public class KDTreeTest {
-
+    private static Random rTemp = new Random(500);
     private static final int min_X = -1000, min_Y = -1000;
     private static final int max_X = 1000, max_Y = 1000;
 
@@ -43,7 +43,7 @@ public class KDTreeTest {
 //        double x = rTemp.nextDouble()*1000;
 //        double y = rTemp.nextDouble()*1000;
 //        return new Point(x,y);
-        Random rTemp = new Random(500);
+
         return new Point(randomX(rTemp), randomY(rTemp));
     }
 
@@ -89,7 +89,7 @@ public class KDTreeTest {
         for (Point p : queries) {
             Point expected = nps.nearest(p.getX(), p.getY());
             Point actual = kd.nearest(p.getX(), p.getY());
-            assertEquals(distance(p.getX(),expected.getX(),p.getY(),expected.getY()), distance(p.getX(),actual.getX(),p.getY(),actual.getY()), 0.000001);
+            assertEquals(Point.distance(expected,p), Point.distance(actual,p), 0.000001);
         }
     }
 
@@ -156,6 +156,7 @@ public class KDTreeTest {
         for(int i = 31250; i<= 1000000; i = i + i){
             KDTree testKD = new KDTree(randomPoints(i));
             //List<Point> xPoints = randomPoints(i);
+            Ns1.add(i);
 
             Stopwatch sw1 = new Stopwatch();
             for(int m = 0; m<1000000; m++){
@@ -164,7 +165,7 @@ public class KDTreeTest {
                 //System.out.println(pRand);
             }
             times.add(sw1.elapsedTime());
-            Ns1.add(i);
+
             opCounts.add(1000000);
 
         }
