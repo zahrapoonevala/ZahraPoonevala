@@ -139,7 +139,7 @@ public class KDTreeTest {
             // System.out.println(pRand);
             times.add(sw1.elapsedTime());
             Ns1.add(i);
-            opCounts.add(1000000);
+            opCounts.add(i);
             }
         printTimingTable( Ns1, times,  opCounts);
 
