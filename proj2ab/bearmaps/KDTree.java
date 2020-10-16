@@ -47,7 +47,7 @@ public class KDTree {
 
 
     private int compareHelp(Point one, Point two, boolean subspaces) {
-        if (subspaces == HORIZONTAL){
+        if (subspaces == HORIZONTAL) {
             return Double.compare(one.getX(), two.getX());
         }
         return Double.compare(one.getY(), two.getY());
