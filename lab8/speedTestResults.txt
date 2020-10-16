@@ -1,0 +1,6 @@
+Enter # strings to insert into ULLMap: 2000
+class ULLMap: 0.06 sec
+
+Enter # strings to insert into MyHashMap: 2000
+class MyHashMap: 0.01 sec
+
