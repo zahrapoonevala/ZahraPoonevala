@@ -12,8 +12,8 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     private double loadFactor;
     private HashSet<K> keys;
 
-    public static final int default_size = 16;
-    public static final double default_load = 0.75;
+    private static final int default_size = 16;
+    private static final double default_load = 0.75;
 
     private class Node {
         K key;
@@ -131,13 +131,13 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     }
 
     @Override
-    public Object remove(Object key) {
+    public V remove(K key) {
 
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Object remove(Object key, Object value) {
+    public V remove(K key, V value) {
         throw new UnsupportedOperationException();
     }
 
