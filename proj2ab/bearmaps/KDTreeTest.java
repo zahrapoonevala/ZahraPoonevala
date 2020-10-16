@@ -16,7 +16,7 @@ public class KDTreeTest {
     private static final int min_X = -1000, min_Y = -1000;
     private static final int max_X = 1000, max_Y = 1000;
 
-
+    /** @source cs61b 2019 ds6 lec22 kd trees */
     private static KDTree lectureTree() {
         Point p1 = new Point(2, 3);
         Point p2 = new Point(4, 2);
@@ -30,6 +30,7 @@ public class KDTreeTest {
         return temp;
     }
 
+    /** @source cs61b Josh Hug walkthrough video */
     @Test
     public void test(){
         KDTree testTree = lectureTree();
@@ -108,7 +109,7 @@ public class KDTreeTest {
     }
 
 
-
+    /** @source cs61b fall 2020 Lab 5 */
     private static void printTimingTable(List<Integer> Ns, List<Double> times, List<Integer> opCounts) {
         System.out.printf("%12s %12s %12s %12s\n", "N", "time (s)", "# ops", "microsec/op");
         System.out.printf("------------------------------------------------------------\n");

@@ -8,13 +8,13 @@ public class KDTree {
     private static final boolean VERTICAL = true;
     private Node root;
 
-    private class Node{
+    private class Node {
         private Point temp;
         private boolean subspaces;
         private Node left;
         private Node right;
 
-        private Node(Point p, boolean subspaces){
+        private Node(Point p, boolean subspaces) {
             temp = p;
             this.subspaces = subspaces;
             //c = 0;
@@ -22,21 +22,21 @@ public class KDTree {
 
     }
 
-    public KDTree(List<Point> points){
-        for(Point p: points){
-            root = insert(p,root,HORIZONTAL);
+    public KDTree(List<Point> points) {
+        for (Point p: points) {
+            root = insert(p, root, HORIZONTAL);
         }
     }
 
-    private Node insert(Point p, Node n, boolean subspaces){
-        if(n == null){
+    private Node insert(Point p, Node n, boolean subspaces) {
+        if (n == null) {
             return new Node(p, subspaces);
         }
-        if(p.equals(n.temp)){
+        if (p.equals(n.temp)) {
             return n;
         }
-        int temp = compareHelp(p, n.temp,subspaces);
-        if(temp >= 0){
+        int temp = compareHelp(p,  n.temp, subspaces);
+        if (temp >= 0) {
             n.right = insert(p, n.right, !subspaces);
         } else if (temp < 0) {
             n.left = insert(p, n.left, !subspaces);
@@ -46,35 +46,35 @@ public class KDTree {
     }
 
 
-    private int compareHelp(Point one, Point two, boolean subspaces){
-        if(subspaces == HORIZONTAL){
+    private int compareHelp(Point one, Point two, boolean subspaces) {
+        if (subspaces == HORIZONTAL){
             return Double.compare(one.getX(), two.getX());
         }
-         return Double.compare(one.getY(), two.getY());
+        return Double.compare(one.getY(), two.getY());
     }
 
     /** @source cs61b 2019 ds6 lec22 kd trees pseudocode */
-    public Point nearest(double x, double y){
+    public Point nearest(double x, double y) {
         //c = 0;
-        Node tempNode = nearestHelper(root,new Point(x,y),root);
+        Node current = nearestHelper(root, new Point(x, y), root);
         //System.out.println(c);
-        return new Point(tempNode.temp.getX(), tempNode.temp.getY());
+        return new Point(current.temp.getX(), current.temp.getY());
     }
 
-    private static int c = 0;
-    private Node nearestHelper(Node n, Point goal, Node best){
-        if(n == null){
+    //private static int c = 0;
+    private Node nearestHelper(Node n, Point goal, Node best) {
+        if (n == null) {
             return best;
 
         }
 
-        if(Point.distance(n.temp, goal) < Point.distance(best.temp,goal)){
+        if (Point.distance(n.temp, goal) < Point.distance(best.temp, goal)) {
             best = n;
         }
         Node goodSide;
         Node badSide;
-        int temp = compareHelp(goal, n.temp, n.subspaces);
-        if(temp < 0){
+        int answer = compareHelp(goal, n.temp, n.subspaces);
+        if (answer < 0) {
             goodSide = n.left;
             badSide = n.right;
         } else {
@@ -82,9 +82,9 @@ public class KDTree {
             badSide = n.left;
 
         }
-        best = nearestHelper(goodSide,goal,best);
+        best = nearestHelper(goodSide, goal, best);
 
-        if (useful(n, goal, best)){
+        if (useful(n, goal, best)) {
             best = nearestHelper(badSide, goal, best);
         }
 
