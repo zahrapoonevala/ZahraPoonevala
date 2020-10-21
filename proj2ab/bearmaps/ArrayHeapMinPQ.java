@@ -25,7 +25,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
     }
 
     /** @source https://algs4.cs.princeton.edu/24pq/MinPQ.java.html */
-    private void swap(int k, int i){
+    private void swap(int k, int i) {
         getItem.replace(minHeap.get(k).value, i);
         getItem.replace(minHeap.get(i).value, k);
         Node swap = minHeap.get(k);
@@ -105,13 +105,13 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
 
     /** @source https://algs4.cs.princeton.edu/24pq/MinPQ.java.html */
     private void sink(int k) {
-        int tempLC = leftChild(k);
-        int tempRC = rightChild(k);
+        int LC = leftChild(k);
+        int RC = rightChild(k);
         int swapChild;
-        while (tempLC < size()) {
-            swapChild = tempLC;
-            if (tempRC < size() && (minHeap.get(tempRC).keyPriority < minHeap.get(swapChild).keyPriority)) {
-                swapChild = tempRC;
+        while (LC < size()) {
+            swapChild = LC;
+            if (RC < size() && (minHeap.get(RC).keyPriority < minHeap.get(swapChild).keyPriority)) {
+                swapChild = RC;
             }
 
             if (minHeap.get(k).keyPriority < minHeap.get(swapChild).keyPriority) {
