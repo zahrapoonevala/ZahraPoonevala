@@ -11,27 +11,27 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
         T value;
         double keyPriority;
 
-        Node(T V, double K){
-        value = V;
-        keyPriority = K;
-    }
-
-    }
-
-        public ArrayHeapMinPQ() {
-//            size = 0;
-            minHeap = new ArrayList<Node>();
-            getItem = new HashMap<T, Integer>();
+        Node(T V, double K) {
+            value = V;
+            keyPriority = K;
         }
+
+    }
+
+    public ArrayHeapMinPQ() {
+//            size = 0;
+        minHeap = new ArrayList<Node>();
+        getItem = new HashMap<T, Integer>();
+    }
 
     /** @source https://algs4.cs.princeton.edu/24pq/MinPQ.java.html */
-        private void swap(int k, int i){
-            getItem.replace(minHeap.get(k).value, i);
-            getItem.replace(minHeap.get(i).value, k);
-            Node swap = minHeap.get(k);
-            minHeap.set(k, minHeap.get(i));
-            minHeap.set(i, swap);
-        }
+    private void swap(int k, int i){
+        getItem.replace(minHeap.get(k).value, i);
+        getItem.replace(minHeap.get(i).value, k);
+        Node swap = minHeap.get(k);
+        minHeap.set(k, minHeap.get(i));
+        minHeap.set(i, swap);
+    }
 
     /** @source cs61b 2020 ds6 lec21 heaps and pq pseudocode */
     private int parent(int k) {
@@ -49,14 +49,14 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
     }
 
     /** @source cs61b 2020 ds6 lec21 heaps and pq pseudocode */
-        private void swim(int k) {
-            int tempP = parent(k);
-            if (minHeap.get(tempP).keyPriority > minHeap.get(k).keyPriority){
-                swap(k, tempP);
-                swim(parent(k));
-            }
-
+    private void swim(int k) {
+        int tempP = parent(k);
+        if (minHeap.get(tempP).keyPriority > minHeap.get(k).keyPriority) {
+            swap(k, tempP);
+            swim(parent(k));
         }
+
+    }
 
 
     @Override
@@ -71,7 +71,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
 
         }
 
-        }
+    }
 
 
     @Override
@@ -81,7 +81,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
 
     @Override
     public T getSmallest() {
-        if(minHeap.size() == 0){
+        if (minHeap.size() == 0) {
             throw new NoSuchElementException();
         }
         T answer;
@@ -105,13 +105,13 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
 
     /** @source https://algs4.cs.princeton.edu/24pq/MinPQ.java.html */
     private void sink(int k) {
-        int tempLeftChild = leftChild(k);
-        int tempRightChild = rightChild(k);
+        int tempLC = leftChild(k);
+        int tempRC = rightChild(k);
         int swapChild;
-        while(tempLeftChild < size()) {
-                swapChild = tempLeftChild;
-            if (tempRightChild < size() && (minHeap.get(tempRightChild).keyPriority < minHeap.get(swapChild).keyPriority)) {
-                swapChild = tempRightChild;
+        while (tempLC < size()) {
+            swapChild = tempLC;
+            if (tempRC < size() && (minHeap.get(tempRC).keyPriority < minHeap.get(swapChild).keyPriority)) {
+                swapChild = tempRC;
             }
 
             if (minHeap.get(k).keyPriority < minHeap.get(swapChild).keyPriority) {
@@ -127,14 +127,14 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
 
     @Override
     public T removeSmallest() {
-        if(size() == 0) {
+        if (size() == 0) {
             throw new NoSuchElementException();
         }
-            T result = this.getSmallest();
-            getItem.remove(result);
-            swap(0, minHeap.size() - 1);
-            minHeap.remove(minHeap.size() - 1);
-            sink(0);
+        T result = this.getSmallest();
+        getItem.remove(result);
+        swap(0, minHeap.size() - 1);
+        minHeap.remove(minHeap.size() - 1);
+        sink(0);
 
         return result;
 
@@ -154,7 +154,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
         double prevP = minHeap.get(itemChange).keyPriority;
         minHeap.get(itemChange).keyPriority = priority;
 
-        if (prevP > priority){
+        if (prevP > priority) {
             swim(itemChange);
         }
         sink(itemChange);
