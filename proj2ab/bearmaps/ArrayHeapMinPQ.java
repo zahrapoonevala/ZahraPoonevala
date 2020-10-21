@@ -105,13 +105,13 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
 
     /** @source https://algs4.cs.princeton.edu/24pq/MinPQ.java.html */
     private void sink(int k) {
-        int LC = leftChild(k);
-        int RC = rightChild(k);
+        int lC = leftChild(k);
+        int rC = rightChild(k);
         int swapChild;
-        while (LC < size()) {
-            swapChild = LC;
-            if (RC < size() && (minHeap.get(RC).keyPriority < minHeap.get(swapChild).keyPriority)) {
-                swapChild = RC;
+        while (lC < size()) {
+            swapChild = lC;
+            if (rC < size() && (minHeap.get(rC).keyPriority < minHeap.get(swapChild).keyPriority)) {
+                swapChild = rC;
             }
 
             if (minHeap.get(k).keyPriority < minHeap.get(swapChild).keyPriority) {
