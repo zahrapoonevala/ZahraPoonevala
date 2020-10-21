@@ -161,8 +161,6 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T>  {
 
     }
 
-    int getX (T item) {
-        return getItem.get(item);
-    }
+
 
 }

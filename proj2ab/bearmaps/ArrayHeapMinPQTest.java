@@ -35,8 +35,9 @@ public class ArrayHeapMinPQTest {
         test2.add(8, 2);
         test2.add(7, 6);
         test2.add(6, 10);
-        assertEquals((Integer)9, test2.getSmallest());
+        assertEquals((Integer) 9, test2.getSmallest());
     }
+
     @Test
     public void testRemoveSmallestFunction() {
         ArrayHeapMinPQ<Integer> test3 = new ArrayHeapMinPQ<>();
@@ -45,9 +46,9 @@ public class ArrayHeapMinPQTest {
         test3.add(8, 103);
         test3.add(11, 108);
         test3.add(9, 1108);
-        assertEquals((Integer)6, test3.removeSmallest());
+        assertEquals((Integer) 6, test3.removeSmallest());
         assertEquals(4, test3.size());
-        assertEquals((Integer)7, test3.removeSmallest());
+        assertEquals((Integer) 7, test3.removeSmallest());
         assertEquals(3, test3.size());
     }
 
@@ -55,13 +56,13 @@ public class ArrayHeapMinPQTest {
     public void testChangePriorityFunction() {
         ArrayHeapMinPQ<Integer> test4 = new ArrayHeapMinPQ<>();
         test4.add(5, 3);
-        test4.add(6,2);
-        test4.add(7,1);
-        test4.add(8,5);
-        test4.add(12,10);
+        test4.add(6, 2);
+        test4.add(7, 1);
+        test4.add(8, 5);
+        test4.add(12, 10);
         assertEquals(5, test4.size());
         assertEquals((Integer) 7, test4.getSmallest());
-        test4.changePriority(7,4);
+        test4.changePriority(7, 4);
         assertEquals((Integer) 6, test4.getSmallest());
 
     }
@@ -70,18 +71,18 @@ public class ArrayHeapMinPQTest {
     public void testCombinedFunctions() {
         ArrayHeapMinPQ<Integer> test5 = new ArrayHeapMinPQ<>();
         test5.add(5, 3);
-        test5.add(6,2);
-        test5.add(7,1);
-        test5.add(20,0.1);
-        test5.add(30,0.001);
-        test5.add(40,0.5);
-        test5.add(500,1000);
-        test5.add(9,100);
-        test5.add(12,20);
+        test5.add(6, 2);
+        test5.add(7, 1);
+        test5.add(20, 0.1);
+        test5.add(30, 0.001);
+        test5.add(40, 0.5);
+        test5.add(500, 1000);
+        test5.add(9, 100);
+        test5.add(12, 20);
         assertEquals(9, test5.size());
         assertFalse(test5.contains(1));
         assertTrue(test5.contains(30));
-        assertEquals((Integer)30,test5.removeSmallest());
+        assertEquals((Integer) 30, test5.removeSmallest());
         assertFalse(test5.contains(30));
 
         test5.changePriority(20, 1.1);
@@ -90,37 +91,39 @@ public class ArrayHeapMinPQTest {
 
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testException1() {
         ArrayHeapMinPQ<Integer> test7 = new ArrayHeapMinPQ<>();
-        test7.add(1,5);
-        test7.add(1,4);
+        test7.add(1, 5);
+        test7.add(1, 4);
 
     }
 
-    @Test (expected = NoSuchElementException.class)
+    @Test(expected = NoSuchElementException.class)
     public void testException2() {
         ArrayHeapMinPQ<Integer> test8 = new ArrayHeapMinPQ<>();
-        test8.add(1,5);
-        test8.add(2,4);
+        test8.add(1, 5);
+        test8.add(2, 4);
         test8.removeSmallest();
         test8.removeSmallest();
         test8.getSmallest();
 
     }
 
-    @Test (expected = NoSuchElementException.class)
+    @Test(expected = NoSuchElementException.class)
     public void testException3() {
         ArrayHeapMinPQ<Integer> test9 = new ArrayHeapMinPQ<>();
-        test9.add(1,5);
-        test9.add(2,4);
-        test9.add(3,8);
-        test9.changePriority(4,5);
+        test9.add(1, 5);
+        test9.add(2, 4);
+        test9.add(3, 8);
+        test9.changePriority(4, 5);
 
     }
 
 
-    /** @source cs61b fall 2020 Lab 5 */
+    /**
+     * @source cs61b fall 2020 Lab 5
+     */
     private static void printTimingTable(List<Integer> Ns, List<Double> times, List<Integer> opCounts) {
         System.out.printf("%12s %12s %12s %12s\n", "N", "time (s)", "# ops", "microsec/op");
         System.out.printf("------------------------------------------------------------\n");
@@ -139,25 +142,45 @@ public class ArrayHeapMinPQTest {
         List<Integer> Ns1 = new ArrayList<>();
         List<Double> times = new ArrayList<>();
         List<Integer> opCounts = new ArrayList<>();
-        Random temp = new Random (10);
+        Random temp = new Random(10);
         ArrayHeapMinPQ<Integer> test = new ArrayHeapMinPQ<>();
 
         Stopwatch sw1 = new Stopwatch();
-        for(int i = 0; i<= 1000000; i = i + 1){
-            test.add(i,temp.nextInt());
-            //List<Point> xPoints = randomPoints(i);
+        for (int i = 0; i <= 1000000; i = i + 1) {
+            test.add(i, temp.nextInt());
 
-            //for(int m = 0; m<10000; m++){
-            //new KDTree(randomPoints);
-            // System.out.println(pRand);
             times.add(sw1.elapsedTime());
             Ns1.add(i);
             opCounts.add(i);
         }
-        printTimingTable( Ns1, times,  opCounts);
+        printTimingTable(Ns1, times, opCounts);
+
+    }
+
+    @Test
+    public void timeTestRemoveSmallest() {
+        List<Integer> Ns2 = new ArrayList<>();
+        List<Double> times = new ArrayList<>();
+        List<Integer> opCounts = new ArrayList<>();
+        Random temp = new Random(10);
+        ArrayHeapMinPQ<Integer> test = new ArrayHeapMinPQ<>();
+
+        for (int i = 0; i <= 1000000; i = i + 1) {
+            test.add(i, temp.nextInt());
+        }
+            Stopwatch sw1 = new Stopwatch();
+            for (int j = 0; j <= 1000; j = j + 1) {
+                test.removeSmallest();
+
+                times.add(sw1.elapsedTime());
+                Ns2.add(j);
+                opCounts.add(j);
+            }
+            printTimingTable(Ns2, times, opCounts);
+
+        }
+
 
     }
 
 
-
-}
