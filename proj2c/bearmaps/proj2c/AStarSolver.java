@@ -48,13 +48,13 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
                 break;
             }
 
-            counter ++ ;
+
             List<WeightedEdge<Vertex>> edges = G.neighbors(smallest);
             for (WeightedEdge<Vertex> e : edges) {
                 Vertex q = e.to();
                 Vertex p = smallest ; // p = smallest
                 weight = e.weight();
-                if (distTo.get(q) == null || distTo.get(q) >= distTo.get(p) + weight) {
+                if (distTo.get(q) == null || distTo.get(q) > distTo.get(p) + weight) {
                     distTo.put(q, distTo.get(p) + weight);
                     edgeTo.put(q, smallest);
                     double heuristic = G.estimatedDistanceToGoal(p, goal);
@@ -67,6 +67,7 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
                 }
 
             }
+            counter ++ ;
 
 
         }
