@@ -1,6 +1,5 @@
 package bearmaps.proj2c;
 
-import bearmaps.proj2ab.ArrayHeapMinPQ;
 import bearmaps.proj2ab.DoubleMapPQ;
 import edu.princeton.cs.algs4.Stopwatch;
 
@@ -20,25 +19,25 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
 
 
 
-    public AStarSolver(AStarGraph<Vertex> G, Vertex start, Vertex goal, double timeout){
+    public AStarSolver(AStarGraph<Vertex> G, Vertex start, Vertex goal, double timeout) {
         Stopwatch sw = new Stopwatch();
-        if(G == null) { //Check for unsolvable
+        if (G == null) { //Check for unsolvable
             time = sw.elapsedTime();
             finalOutcome = SolverOutcome.UNSOLVABLE;
         }
 
         finalOutcome = SolverOutcome.SOLVED;
         //Pseudocode from spec
-        DoubleMapPQ<Vertex> PQ = new DoubleMapPQ<>();
+        DoubleMapPQ<Vertex> pQ = new DoubleMapPQ<>();
         distTo = new HashMap<>();
         edgeTo = new HashMap<>();
-        double priority = G.estimatedDistanceToGoal(start,goal);
-        PQ.add(start, priority);
-        distTo.put(start,0.0);
+        double priority = G.estimatedDistanceToGoal(start, goal);
+        pQ.add(start, priority);
+        distTo.put(start, 0.0);
         edgeTo.put(start, start);
-        while(PQ.size() != 0) {
-            Vertex smallest = PQ.removeSmallest();
-            if(smallest.equals(goal)){
+        while (pQ.size() != 0) {
+            Vertex smallest = pQ.removeSmallest();
+            if (smallest.equals(goal)) {
                 break;
             }
 
@@ -48,38 +47,38 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
                 break;
             }
 
-
+            /** @source Algorithm Pseudocode https://fa20.datastructur.es/materials/proj/proj2c/proj2c#faq */
             List<WeightedEdge<Vertex>> edges = G.neighbors(smallest);
             for (WeightedEdge<Vertex> e : edges) {
                 Vertex q = e.to();
-                Vertex p = smallest ; // p = smallest
+                Vertex p = smallest; // p = smallest
                 weight = e.weight();
                 if (distTo.get(q) == null || distTo.get(q) > distTo.get(p) + weight) {
                     distTo.put(q, distTo.get(p) + weight);
                     edgeTo.put(q, smallest);
-                    double heuristic = G.estimatedDistanceToGoal(p, goal);
-                    if(PQ.contains(q)) {
-                        PQ.changePriority(q, distTo.get(p) + weight + heuristic);
+                    double heuristic = G.estimatedDistanceToGoal(q, goal);
+                    if (pQ.contains(q)) {
+                        pQ.changePriority(q, distTo.get(p) + weight + heuristic);
                     } else {
-                        PQ.add(q,distTo.get(p) + weight + heuristic);
+                        pQ.add(q, distTo.get(p) + weight + heuristic);
                     }
 
                 }
 
             }
-            counter ++ ;
+            counter++;
 
 
         }
         answers = new LinkedList<>();
         if (!(finalOutcome == SolverOutcome.TIMEOUT || finalOutcome == SolverOutcome.UNSOLVABLE)) {
-            if(distTo.get(goal) == null) {
+            if (distTo.get(goal) == null) {
                 finalOutcome = SolverOutcome.UNSOLVABLE;
             } else {
                 finalWeight = distTo.get(goal);
                 Vertex i = goal;
-                answers.add(0,goal);
-                while (!i.equals(start)){
+                answers.add(0, goal);
+                while (!i.equals(start)) {
                     i = edgeTo.get(i);
                     answers.add(0, i);
                 }
@@ -101,12 +100,12 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
 
     @Override
     public List<Vertex> solution() {
-       return answers;
+        return answers;
     }
 
     @Override
     public double solutionWeight() {
-        if(finalOutcome == SolverOutcome.TIMEOUT || finalOutcome == SolverOutcome.UNSOLVABLE){
+        if (finalOutcome == SolverOutcome.TIMEOUT || finalOutcome == SolverOutcome.UNSOLVABLE) {
             return 0.0;
         }
         return finalWeight;
