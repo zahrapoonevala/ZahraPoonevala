@@ -18,7 +18,7 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
     private int counter;
 
 
-
+    /** @source https://fa20.datastructur.es/materials/proj/proj2c/proj2c#the-a-algorithm */
     public AStarSolver(AStarGraph<Vertex> G, Vertex start, Vertex goal, double timeout) {
         Stopwatch sw = new Stopwatch();
         if (G == null) { //Check for unsolvable
@@ -32,12 +32,13 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
         distTo = new HashMap<>();
         edgeTo = new HashMap<>();
         double priority = G.estimatedDistanceToGoal(start, goal);
-        pQ.add(start, priority);
         distTo.put(start, 0.0);
         edgeTo.put(start, start);
+        pQ.add(start, priority);
         while (pQ.size() != 0) {
             Vertex smallest = pQ.removeSmallest();
             if (smallest.equals(goal)) {
+                time = sw.elapsedTime();
                 break;
             }
 
@@ -47,7 +48,7 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
                 break;
             }
 
-            /** @source Algorithm Pseudocode https://fa20.datastructur.es/materials/proj/proj2c/proj2c#faq */
+            /** @source https://fa20.datastructur.es/materials/proj/proj2c/proj2c#the-a-algorithm */
             List<WeightedEdge<Vertex>> edges = G.neighbors(smallest);
             for (WeightedEdge<Vertex> e : edges) {
                 Vertex q = e.to();
