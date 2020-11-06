@@ -23,8 +23,8 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
 
     private List<Point> listPoints = new ArrayList<>();
     private Map<Point, Node> pToN = new HashMap<>();
-    private Trie trie = new Trie();
-
+    private Trie trieNames = new Trie();
+    private Map<String, List<Node>> names = new HashMap<>();
 
 
     public AugmentedStreetMapGraph(String dbPath) {
@@ -38,6 +38,20 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
                 pToN.put(newPoint, i);
 
             }
+        for (Node x : nodes) {
+            if(x.name() == null) {
+                break;
+            } else {
+                String clean = cleanString(x.name());
+                trieNames.add(clean);
+                if (!names.containsKey(clean)){
+                    names.put(clean, new LinkedList<>());
+                }
+                names.get(clean).add(x);
+            }
+
+        }
+
 
         }
 
@@ -67,7 +81,19 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
      * cleaned <code>prefix</code>.
      */
     public List<String> getLocationsByPrefix(String prefix) {
-        return new LinkedList<>();
+       List<String> cleaned = new LinkedList<>();
+       List<String> answer = new LinkedList<>();
+       String cleanedPrefix = cleanString(prefix);
+       cleaned = trieNames.keysWithPrefix(cleanedPrefix);
+       for (String i : cleaned) {
+            for (Node n : names.get(i)){
+                if (!answer.contains(n.name())){
+                    answer.add(n.name());
+                }
+
+            }
+       }
+       return answer;
     }
 
     /**
@@ -84,7 +110,19 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
      * "id" -> Number, The id of the node. <br>
      */
     public List<Map<String, Object>> getLocations(String locationName) {
-        return new LinkedList<>();
+        List<Node> listNodes = new LinkedList<>();
+        List<Map<String, Object>> answer = new LinkedList<>();
+        String cleanedParam = cleanString(locationName);
+        listNodes = names.get(cleanedParam);
+        for (Node y : listNodes) {
+            Map<String, Object> hold = new HashMap<>();
+            hold.put("lat" , y.lat());
+            hold.put("lon" , y.lon());
+            hold.put("name" , y.name());
+            hold.put("id" , y.id());
+            answer.add(hold);
+        }
+        return answer;
     }
 
 
