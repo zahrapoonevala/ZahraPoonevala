@@ -2,6 +2,7 @@ package bearmaps.proj2d.server.handler.impl;
 
 import bearmaps.proj2d.AugmentedStreetMapGraph;
 import bearmaps.proj2d.server.handler.APIRouteHandler;
+import edu.princeton.cs.algs4.Stopwatch;
 import spark.Request;
 import spark.Response;
 import bearmaps.proj2d.utils.Constants;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import static bearmaps.proj2d.utils.Constants.*;
+
 
 /**
  * Handles requests from the web browser for map images. These images
@@ -81,6 +83,7 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
      * "query_success" : Boolean, whether the query was able to successfully complete; don't
      *                    forget to set this to true on success! <br>
      */
+
     @Override
     public Map<String, Object> processRequest(Map<String, Double> requestParams, Response response) {
        // System.out.println("yo, wanna know the parameters given by the web browser? They are:");
@@ -88,6 +91,7 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         Map<String, Object> results = new HashMap<>();
 //        System.out.println("Since you haven't implemented RasterAPIHandler.processRequest, nothing is displayed in "
 //                + "your browser.");
+        Stopwatch sw = new Stopwatch();
         double ullat = requestParams.get("ullat");
         double ullon = requestParams.get("ullon");
         double lrlat = requestParams.get("lrlat");
@@ -130,7 +134,8 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         String[][] result = new String [i][j];
         for (int x = 0; x < i; x++) {
             for (int y = 0; y < j; y++) {
-                result[x][y] = String.format("d%s_x%s_y%s.png", depth, (int) ulon + y, (int) ulat + x);
+                //result[x][y] = String.format("d%s_x%s_y%s.png", depth, ulon + y, ulat + x);
+                result[x][y] = "d" + depth + "_x" +  (ulon + y) + "_y" + (ulat + x) + ".png";
             }
         }
         results.put("raster_ul_lon", rasterUllon);
@@ -140,6 +145,7 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         results.put("query_success", true);
         results.put("render_grid", result);
         results.put("depth", depth);
+        System.out.println(sw.elapsedTime());
         return results;
     }
 
