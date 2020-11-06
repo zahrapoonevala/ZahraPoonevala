@@ -73,8 +73,12 @@ public class Trie  {
                 return results;
         }
 
+        if(temp.isKey) {
+            results.add(s);
+        }
+
         for(char c : temp.indexedMap.keySet()) {
-            helperKeysWtihPrefix(s + c, results, temp.indexedMap.get(c));
+            helperKeysWtihPrefix(s, results, temp.indexedMap.get(c));
         }
         return results;
     }

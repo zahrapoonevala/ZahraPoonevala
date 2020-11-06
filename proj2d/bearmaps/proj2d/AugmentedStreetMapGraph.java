@@ -81,10 +81,9 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
      * cleaned <code>prefix</code>.
      */
     public List<String> getLocationsByPrefix(String prefix) {
-       List<String> cleaned = new LinkedList<>();
+        String cleanedPrefix = cleanString(prefix);
+       List<String> cleaned = trieNames.keysWithPrefix(cleanedPrefix);
        List<String> answer = new LinkedList<>();
-       String cleanedPrefix = cleanString(prefix);
-       cleaned = trieNames.keysWithPrefix(cleanedPrefix);
        for (String i : cleaned) {
             for (Node n : names.get(i)){
                 if (!answer.contains(n.name())){
@@ -110,10 +109,10 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
      * "id" -> Number, The id of the node. <br>
      */
     public List<Map<String, Object>> getLocations(String locationName) {
-        List<Node> listNodes = new LinkedList<>();
-        List<Map<String, Object>> answer = new LinkedList<>();
         String cleanedParam = cleanString(locationName);
-        listNodes = names.get(cleanedParam);
+        List<Node> listNodes = names.get(cleanedParam);
+        List<Map<String, Object>> answer = new LinkedList<>();
+
         for (Node y : listNodes) {
             Map<String, Object> hold = new HashMap<>();
             hold.put("lat" , y.lat());
