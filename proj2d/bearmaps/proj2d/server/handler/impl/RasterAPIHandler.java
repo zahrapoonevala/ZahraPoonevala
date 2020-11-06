@@ -112,10 +112,10 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         double dLon = distancePerTile(ROOT_LRLON, ROOT_ULLON, depth);
         double dLat = distancePerTile(ROOT_ULLAT, ROOT_LRLAT, depth);
 
-        double ulon = Math.floor( Math.abs((ullon - ROOT_ULLON) / dLon) );
-        double ulat = Math.floor(Math.abs((ullat - ROOT_ULLAT) / dLat));//(noBoxes(ullat, ROOT_ULLAT, dLat));
-        double llon = Math.ceil(Math.abs((lrlon - ROOT_ULLON) / dLon));//(noBoxes(lrlon, ROOT_ULLON, dLon));
-        double llat = Math.ceil(Math.abs((lrlat - ROOT_ULLAT) / dLat));//(noBoxes(lrlat, ROOT_ULLAT, dLat));
+        double ulon = Math.floor(noBoxes(ullon, ROOT_ULLON, dLon));
+        double ulat = Math.floor(noBoxes(ullat, ROOT_ULLAT, dLat));
+        double llon = Math.ceil(noBoxes(lrlon, ROOT_ULLON, dLon));
+        double llat = Math.ceil(noBoxes(lrlat, ROOT_ULLAT, dLat));
 
 
         double rasterUllon = rasterHelperLON(ullon, ROOT_ULLON, dLon, ulon);
@@ -155,9 +155,9 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         return numerator / denominator;
     }
 
-//    private double noBoxes(double x, double y, double z){
-//        return Math.abs((x - y)  / z);
-//    }
+    private double noBoxes(double x, double y, double z){
+        return Math.abs((x - y)  / z);
+    }
 
     private double rasterHelperLON(double start, double end, double distance, double boxes) {
         double answer = ROOT_ULLON;
