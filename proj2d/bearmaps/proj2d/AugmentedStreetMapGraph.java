@@ -38,16 +38,15 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
                 pToN.put(newPoint, i);
 
             }
-        for (Node x : nodes) {
-            if(x.name() == null) {
-                break;
-            } else {
-                String clean = cleanString(x.name());
+        //
+
+            if(name(i.id()) != null) {
+                String clean = cleanString(name(i.id()));
                 trieNames.add(clean);
                 if (!names.containsKey(clean)){
                     names.put(clean, new LinkedList<>());
                 }
-                names.get(clean).add(x);
+                names.get(clean).add(i);
             }
 
         }
@@ -55,7 +54,7 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
 
         }
 
-    }
+
 
 
     /**
