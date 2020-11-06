@@ -161,27 +161,24 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
 
     private double rasterHelperLON(double start, double end, double distance, double boxes) {
         double answer = ROOT_ULLON;
-        double noBoxes = boxes;
-        while(noBoxes > 0){
-            answer += distance;
-            noBoxes -- ;
-        }
+        //double noBoxes = boxes;
+        //while(noBoxes > 0){
+            //answer += distance;
+            //noBoxes -- ;
+       answer = answer + boxes * distance;
 
         return answer;
     }
     private double rasterHelperLAT(double start, double end, double distance, double boxes) {
         double answer = ROOT_ULLAT;
-        double noBoxes = boxes;
-        while(noBoxes > 0){
-            answer -= distance;
-            noBoxes -- ;
-        }
+        //double noBoxes = boxes;
+        //while(noBoxes > 0){
+           // answer -= distance;
+            //noBoxes -- ;
+        answer = answer - boxes * distance;
 
         return answer;
     }
-
-
-
 
 
     @Override
