@@ -85,13 +85,18 @@ public class Trie  {
 //            results.add(s);
 //        }
 
-        for(char x: temp.indexedMap.keySet()) {
-            helperKeysWtihPrefix(s + x, results, temp.indexedMap.get(s));
+        if(temp == null) {
+            return results;
+        }
+
+        for(char i: temp.indexedMap.keySet()) {
+            colHelp(s + i, results, temp.indexedMap.get(s));
         }
         return results;
     }
 
-    private void helperKeysWtihPrefix(String s, List<String> x, Node n){
+/** @source https://docs.google.com/presentation/d/1XcpPT_KWUbr25d07iHGHpJN3S5DKA4cB_D4Zs5USqlM/edit#slide=id.g528d808e96_0_3759 */
+    private void colHelp(String s, List<String> x, Node n){
         if (n == null) {
             return;
         }
@@ -100,7 +105,7 @@ public class Trie  {
         }
 
         for(char c : n.indexedMap.keySet()) {
-            helperKeysWtihPrefix(s + c, x , n.indexedMap.get(c));
+            colHelp(s + c, x , n.indexedMap.get(c));
         }
     }
 
