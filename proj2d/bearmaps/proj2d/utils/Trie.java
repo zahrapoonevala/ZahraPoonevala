@@ -81,9 +81,9 @@ public class Trie  {
         Node temp = findStart(s);
         List<String> results = new ArrayList<>();
 
-        if (temp.isKey) {
-            results.add(s);
-        }
+//        if (temp.isKey) {
+//            results.add(s);
+//        }
 
         for(char x: temp.indexedMap.keySet()) {
             helperKeysWtihPrefix(s + x, results, temp.indexedMap.get(s));
