@@ -32,6 +32,14 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
         // You might find it helpful to uncomment the line below:
         List<Node> nodes = this.getNodes();
         for (Node i : nodes) {
+            if (neighbors(i.id()).size() > 0) { //Check for neighbors
+                Point newPoint = new Point(i.lon(), i.lat());
+                listPoints.add(newPoint);
+                pToN.put(newPoint, i);
+
+            }
+        //
+
             if(i.name() != null) {
                 String clean = cleanString(i.name());
                 trieNames.add(clean);
@@ -39,13 +47,6 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
                     names.put(clean, new LinkedList<>());
                 }
                 names.get(clean).add(i);
-            }
-
-            if (neighbors(i.id()).size() > 0) { //Check for neighbors
-                Point newPoint = new Point(i.lon(), i.lat());
-                listPoints.add(newPoint);
-                pToN.put(newPoint, i);
-
             }
 
         }

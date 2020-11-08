@@ -11,11 +11,11 @@ public class Trie  {
     private Node root;
 
     private class Node {
-        private char ch;
+        //private char ch;
         private boolean isKey;
-        private Map <Character, Node> indexedMap;
+        private HashMap <Character, Node> indexedMap;
 
-        private Node(boolean b) {
+            Node(boolean b) {
             isKey = b;
             indexedMap = new HashMap<>();
         }
@@ -24,6 +24,7 @@ public class Trie  {
     public Trie () {
         root = new Node(false);
     }
+
 
     private Node findStart (String k) {
         Node temp = root;
@@ -40,7 +41,7 @@ public class Trie  {
     public boolean contains(String k) {
         boolean containsN;
         if (k == null || k.length() < 1) {
-            containsN = false;
+            throw new IllegalArgumentException();
         }
         Node key = findStart(k);
         if(key != null && key.isKey) {
