@@ -71,11 +71,23 @@ public class Trie  {
     }
 
     public List<String> keysWithPrefix(String s) {
+//        Node temp = findStart(s);
+//        List<String> results = new ArrayList<>();
+//
+//        helperKeysWtihPrefix(s, results, temp);
+//
+//        return results;
+
         Node temp = findStart(s);
         List<String> results = new ArrayList<>();
 
-        helperKeysWtihPrefix(s, results, temp);
+        if (temp.isKey) {
+            results.add(s);
+        }
 
+        for(char x: temp.indexedMap.keySet()) {
+            helperKeysWtihPrefix(s + x, results, temp.indexedMap.get(s));
+        }
         return results;
     }
 

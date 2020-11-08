@@ -91,7 +91,7 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         Map<String, Object> results = new HashMap<>();
 //        System.out.println("Since you haven't implemented RasterAPIHandler.processRequest, nothing is displayed in "
 //                + "your browser.");
-        Stopwatch sw = new Stopwatch();
+
         double ullat = requestParams.get("ullat");
         double ullon = requestParams.get("ullon");
         double lrlat = requestParams.get("lrlat");
@@ -130,7 +130,7 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         int i = (llat - ulat);
         int j = (llon - ulon);
 
-        /** @source https://www.javatpoint.com/java-string-format */
+
         String[][] result = new String [i][j];
         for (int x = 0; x < i; x++) {
             for (int y = 0; y < j; y++) {
@@ -145,7 +145,7 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         results.put("query_success", true);
         results.put("render_grid", result);
         results.put("depth", depth);
-        System.out.println(sw.elapsedTime());
+
         return results;
     }
 
