@@ -58,11 +58,10 @@ public class Trie  {
             return;
         }
         Node temp = root;
-        for(int i = 0; i < k.length(); i++) {
+        for(int i = 0, y = k.length(); i < y; i++) {
             char x = k.charAt(i);
             if(!temp.indexedMap.containsKey(x)) {
-                Node insert = new Node(false);
-                temp.indexedMap.put(x, insert);
+                temp.indexedMap.put(x,  new Node(false));
             }
             temp = temp.indexedMap.get(x);
         }
