@@ -71,28 +71,28 @@ public class Trie  {
     }
 
     public List<String> keysWithPrefix(String s) {
-//        Node temp = findStart(s);
-//        List<String> results = new ArrayList<>();
-//
-//        helperKeysWtihPrefix(s, results, temp);
-//
-//        return results;
-
         Node temp = findStart(s);
         List<String> results = new ArrayList<>();
+
+        colHelp(s, results, temp);
+
+        return results;
+
+//        Node temp = findStart(s);
+//        List<String> results = new ArrayList<>();
 
 //        if (temp.isKey) {
 //            results.add(s);
 //        }
-
-        if(temp == null) {
-            return results;
-        }
-
-        for(char i: temp.indexedMap.keySet()) {
-            colHelp(s + i, results, temp.indexedMap.get(s));
-        }
-        return results;
+//
+//        if(temp == null) {
+//            return results;
+//        }
+//
+//        for(char i: temp.indexedMap.keySet()) {
+//            colHelp(s + i, results, temp.indexedMap.get(s));
+//        }
+//        return results;
     }
 
 /** @source https://docs.google.com/presentation/d/1XcpPT_KWUbr25d07iHGHpJN3S5DKA4cB_D4Zs5USqlM/edit#slide=id.g528d808e96_0_3759 */
