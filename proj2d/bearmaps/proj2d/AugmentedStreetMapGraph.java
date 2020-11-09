@@ -23,7 +23,7 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
 
     private List<Point> listPoints = new ArrayList<>();
     private Map<Point, Node> pToN = new HashMap<>();
-    private Trie trieNames = new Trie();
+    private Trie trieNames;
     private Map<String, List<Node>> names = new HashMap<>();
 
 
@@ -31,6 +31,7 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
         super(dbPath);
         // You might find it helpful to uncomment the line below:
         List<Node> nodes = this.getNodes();
+        trieNames = new Trie();
         for (Node i : nodes) {
             if (neighbors(i.id()).size() > 0) { //Check for neighbors
                 Point newPoint = new Point(i.lon(), i.lat());
