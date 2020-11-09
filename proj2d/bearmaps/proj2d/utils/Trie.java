@@ -25,18 +25,6 @@ public class Trie  {
         root = new Node(false);
     }
 
-//    private Node find(String k) {
-//        Node hold = root;
-//        for (int i = 0; i < k.length(); i++) {
-//            char c = k.charAt(i);
-//            if (!hold.indexedMap.containsKey(c)) {
-//                return null;
-//            }
-//            hold = hold.indexedMap.get(c);
-//        }
-//        return hold;
-//    }
-
 
     public boolean contains(String k) {
         boolean containsN;
