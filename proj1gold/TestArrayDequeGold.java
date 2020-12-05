@@ -1,6 +1,8 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+/** @source StudentArrayDequeLauncher Class */
+/** @source https://docs.oracle.com/javase/tutorial/java/data/numberformat.html */
 
 public class TestArrayDequeGold {
 
